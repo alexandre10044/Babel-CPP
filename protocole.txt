@@ -1,0 +1,83 @@
+Here you will read what you need to know to communicate with server.
+
+CLIENT / CLIENT PROTOCOL
+
+	COMMUNICATION :
+
+		# 004 {pseudo} | Someone is calling you
+		# 005 | Call accepted
+		# 006 | Call closed
+		# 014 {data} | Call data
+		# 015 | Call Accepted Call Back
+
+	PACKETS:
+
+		# Call,
+		# AcceptCall,
+		# HangUp,
+		# CallData
+		# CallAcceptedCallBack
+
+SERVER / CLIENT PROTOCOL
+
+	COMMUNICATION :
+
+		# Connection
+
+			Client -> # 000 {port} | New client say hello and give his port number for the calls
+			Server -> # 000 | Hello new client :D
+			Client -> # 001 {pseudo} | New client want to login with username
+			Server -> # 002 | You are connected to the server successfully :)
+				or
+			Server -> # 003 | Can't login with this username, someone is already connected.
+
+		# Request Friend invitation
+			Client -> # 007 {pseudo} | Client want to send a friend invitation
+			Server -> # 008 {pseudo} | Friend invitation sent successfully !
+				or
+			Server -> # 009 {pseudo} | Can't found any user with this username
+
+			# Friend will received :
+				Server -> # 010 {pseudo} | Someone is asking for a friend invite
+
+		# Accept Friend invitation
+			Client -> # 011 {pseudo} | Client accepted friend invite
+			Server -> # 013 {address} {port} {pseudo} | Add a friend to the contacts list
+
+			# Friend will received :
+				Server -> # 013 {address} {port} {pseudo} | Add a friend to the contacts list
+
+		# Refuse Friend invitation
+			Client -> # 012 {pseudo} | Client refused friend invite
+
+	PACKETS :
+
+		# Welcome = 0,
+		# Connect,
+		# SuccessConnect,
+		# FailConnect,
+		# PendingRequest,
+		# PendingSuccess,
+		# PendingFail,
+		# PendingInfo,
+		# AcceptPending,
+		# RefusePending,
+		# AddContact
+
+	SERVER CAN SEND TO CLIENT :
+
+		# 000 | Hello
+		# 002 | You connected successfully to the server :)
+		# 003 | Can't login with this username, someone is already connected.
+		# 008 {pseudo} | Friend invitation sent successfully !
+		# 009 {pseudo} | Can't found any user with this username
+		# 010 {pseudo} | Someone is asking for a friend invite
+		# 013 {address} {port} {pseudo} | Add a friend to the contacts list
+
+	CLIENT CAN SEND TO SERVER :
+
+		# 000 {port} | New client say hello and give his port number for the calls
+		# 001 {pseudo} | New client want to login with username
+		# 007 {pseudo} | Client want to send a friend invite
+		# 011 {pseudo} | Client accepted friend invite
+		# 012 {pseudo} | Client refused friend invite
