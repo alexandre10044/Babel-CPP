@@ -59,10 +59,6 @@ Guide of the babel's shell :
 ##### ! If you write a wrong command you'll see "Invalid comman. Please check syntax." !
 
 
-## Author
-
-👤 **Antoine LEVY**
-
 
 
 ***
